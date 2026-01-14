@@ -1,0 +1,791 @@
+# BHive 2025 Annual Report: Scrollytelling Development Plan
+## "Resilience & Refinement" — An Interactive Web Experience
+
+---
+
+## I. PROJECT OVERVIEW
+
+### Vision Statement
+Transform BHive's 2025 Annual Report into an immersive, scroll-driven narrative that visualizes the organization's strategic pivot from volume to quality in response to IRCC regulatory changes. The experience should feel like "entering a hive"—users journey through interconnected hexagonal cells, each revealing a story of adaptation, global impact, and entrepreneurial success.
+
+### Core Narrative Arc
+1. **Opening Hook** → Massive impact numbers draw users in
+2. **The Challenge** → IRCC cap creates constraints
+3. **The Pivot** → Quality over quantity transformation
+4. **Global Reach** → International connections and delegations
+5. **The Ecosystem** → Cohorts, programming, community
+6. **Growth Story** → Digital metrics explosion
+7. **Timeline Journey** → Year of milestones
+8. **Future Vision** → What's next for BHive
+
+---
+
+## II. TECHNICAL STACK
+
+### Core Framework
+```
+React 18+ (with Server Components for SEO)
+Next.js 14 (App Router)
+TypeScript
+Tailwind CSS 3.4+
+```
+
+### Animation & Scroll Libraries
+```
+GSAP (GreenSock) — Core scroll animations
+ScrollTrigger — Scroll-based triggering
+Framer Motion — Component transitions
+Lenis — Smooth scroll behavior
+```
+
+### Data Visualization
+```
+D3.js — Custom visualizations (globe, funnel)
+Recharts — Charts and graphs
+Three.js + React Three Fiber — 3D globe
+react-spring — Physics-based animations
+```
+
+### Additional Dependencies
+```
+react-intersection-observer — Scroll detection
+canvas-confetti — Celebration effects
+react-countup — Animated number counters
+mapbox-gl OR deck.gl — Alternative map solution
+```
+
+---
+
+## III. BRAND IMPLEMENTATION
+
+### Color System (Tailwind Config)
+```javascript
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        'bhive-gold': '#f6c614',      // Primary Accent
+        'bhive-yellow': '#ff6617',    // Secondary Accent (NOTE: verify hex)
+        'bhive-orange': '#ff9100',    // Action/CTA - Buttons ONLY
+        'bhive-black': '#000000',     // Text, Backgrounds
+        'bhive-grey': '#f0f6f0',      // Backgrounds, Forms (10-15% usage)
+      },
+      fontFamily: {
+        'headline': ['Bebas Neue', 'sans-serif'],  // Headlines - ALL CAPS
+        'body': ['Montserrat', 'sans-serif'],      // Body text
+      },
+    },
+  },
+}
+```
+
+### Typography Rules
+| Element | Font | Weight | Style |
+|---------|------|--------|-------|
+| H1/H2 Headlines | Bebas Neue | Bold | ALL CAPS, Condensed |
+| Navigation | Bebas Neue | Bold | ALL CAPS |
+| Body Text | Montserrat | Regular (400) | Sentence case |
+| Subheadings | Montserrat | Semi-Bold (600) | Sentence case |
+| Data Labels | Montserrat | Medium (500) | Uppercase |
+
+### Hexagon Design System
+The hexagon motif should permeate the entire experience:
+- **Section containers** → Hexagonal frames
+- **Photo masks** → Hexagonal clip-paths
+- **Background patterns** → Subtle honeycomb grids
+- **Data point markers** → Small hexagon icons
+- **Transition elements** → Hexagon wipe animations
+- **Loading states** → Pulsing hexagon cells
+
+```css
+/* Hexagon Clip Path */
+.hex-clip {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* Honeycomb Background Pattern */
+.honeycomb-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='...' ...");
+  background-size: 60px 104px;
+  opacity: 0.05;
+}
+```
+
+---
+
+## IV. SECTION-BY-SECTION CONTENT & SPECIFICATIONS
+
+---
+
+### SECTION 1: HERO — "Impact at a Glance"
+
+#### Visual Concept
+Full-viewport dark section with animated golden hexagons floating/connecting. Large animated counters display key metrics. On scroll, hexagons converge to form the BHive logo before transitioning to Section 2.
+
+#### Key Data Points (Animated Counters)
+| Metric | Value | Animation Duration |
+|--------|-------|-------------------|
+| Total Graduated Companies | 66 | 2.5s |
+| New Startups Approved (2025) | 14 | 2s |
+| Programming Hours Delivered | 3,578 | 3s |
+| Total Leads Processed | 5,781 | 3s |
+| Active Mentors | 69 | 1.5s |
+| Events Hosted/Attended | 23 | 1.5s |
+
+#### Content
+```
+HEADLINE: "WHERE GLOBAL FOUNDERS TAKE FLIGHT"
+SUBHEAD: "2025 Annual Report"
+
+SCROLL CTA: "Scroll to explore our story ↓"
+```
+
+#### Animation Sequence
+1. **0-20% scroll**: Numbers count up sequentially
+2. **20-40% scroll**: Hexagons pulse with brand colors
+3. **40-60% scroll**: Particles converge toward center
+4. **60-100% scroll**: Transition wipe to Section 2
+
+#### Technical Implementation
+```jsx
+// CounterCard Component Structure
+<CounterCard
+  value={66}
+  label="Graduated Companies"
+  icon={<HexagonIcon />}
+  color="bhive-gold"
+  delay={0.2}
+/>
+```
+
+---
+
+### SECTION 2: THE CHALLENGE — "The IRCC Pivot"
+
+#### Visual Concept
+Interactive "funnel" visualization showing the dramatic narrowing from 5,781 leads to 14 committed businesses. A visual "cut line" labeled "IRCC Cap" appears mid-funnel with an animated scissors effect.
+
+#### Narrative Content
+```
+HEADLINE: "REFINING THE INTAKE"
+
+BODY TEXT:
+In April 2024, Immigration, Refugees, and Citizenship Canada introduced 
+a cap limiting each Designated Organization to just 10 Letters of Support 
+per year. This regulatory shift transformed how we approach founder selection.
+
+Rather than scaling volume, we doubled down on quality. Every founder 
+who enters BHive now represents the highest potential for outsized impact.
+
+PULL QUOTE:
+"Prioritizing execution capacity and long-term growth potential."
+```
+
+#### Funnel Visualization Data
+```
+Stage 1: 5,781 → "Leads Received" (Full width, bhive-gold)
+Stage 2: 2,890 → "Initial Screening" (75% width)
+Stage 3: 580 → "Application Review" (50% width)
+Stage 4: 116 → "Interview Stage" (30% width)
+Stage 5: 14 → "Committed Businesses" (10% width, bhive-orange)
+
+[IRCC CAP INDICATOR at Stage 4-5 boundary]
+```
+
+#### Interactive Elements
+- **Hover states** on each funnel stage reveal detailed tooltips
+- **Click** to expand stage details in a modal
+- **Scroll-triggered** funnel animation (stages narrow as user scrolls)
+
+#### Technical Notes
+```jsx
+// Funnel built with D3.js or custom SVG
+// Each segment animates width on scroll progress
+// Responsive: Stack vertically on mobile
+```
+
+---
+
+### SECTION 3: GLOBAL FOOTPRINT — "International Reach"
+
+#### Visual Concept
+Interactive 3D globe (or stylized 2D map) with animated connection lines from source countries to Brampton. Hexagonal hotspots pulse on countries with delegations/missions.
+
+#### Geographic Data Points
+
+| Country/Region | Event Type | Date | Details |
+|----------------|------------|------|---------|
+| **Poland** | Green Tech Delegation | April 14, 2025 | 11 startups in renewable energy, sustainable materials, circular economy |
+| **Nigeria** | International Delegation | 2025 | Innovation ecosystem showcase |
+| **Thailand** | International Delegation | 2025 | GEIP promotion |
+| **Philippines** | International Delegation | 2025 | Strategic partnerships |
+| **Kenya** | Canada-Africa Summit | July 3, 2025 | Trade, investment, collaboration |
+| **Sierra Leone** | Ministerial Delegation | Sept 19, 2025 | Honourable Minister of Trade visit |
+
+#### Narrative Content
+```
+HEADLINE: "GLOBAL CONNECTIONS, LOCAL IMPACT"
+
+BODY TEXT:
+BHive's reach extends far beyond Brampton. In 2025, we hosted delegations 
+from three continents, welcoming entrepreneurs, government leaders, and 
+innovation partners to explore Canada's startup ecosystem.
+
+From Poland's green tech pioneers to Sierra Leone's ministerial leadership, 
+each connection strengthens Brampton's position as a global innovation hub.
+
+STAT CALLOUT:
+"11 Polish Green Tech Startups | 6 International Delegations | 3 Continents"
+```
+
+#### Globe Interaction Design
+1. **Auto-rotate** on idle (slow spin)
+2. **Hover on hotspot** → Pause rotation, show tooltip
+3. **Click hotspot** → Expand info panel with delegation details
+4. **Animated arcs** connect each country to Brampton marker
+5. **Hexagonal markers** for each location (brand consistency)
+
+#### Technical Implementation
+```jsx
+// Three.js globe with react-three-fiber
+// Alternative: deck.gl ArcLayer for 2D fallback
+// Hotspots as <Html> overlays in 3D space
+
+const delegations = [
+  { lat: 52.2297, lng: 21.0122, country: 'Poland', event: 'Green Tech' },
+  { lat: 9.0820, lng: 8.6753, country: 'Nigeria', event: 'Delegation' },
+  // ...
+];
+```
+
+---
+
+### SECTION 4: THE COHORT ECOSYSTEM — "Building Founders"
+
+#### Visual Concept
+Interactive tabbed interface with animated stacked bar charts. Each cohort tab reveals phase distribution with hexagonal iconography for industry sectors.
+
+#### Cohort Data
+
+**Winter 2025**
+| Phase | Companies | Industries |
+|-------|-----------|------------|
+| Phase 1 (Virtual) | 4 | EdTech, AI |
+| Phase 2 (In-Person) | 4 | HealthTech, SaaS |
+| Phase 3 (Advanced) | 7 | CleanTech, FinTech |
+| **Total** | **15** | |
+
+**Spring 2025**
+| Phase | Companies | Industries |
+|-------|-----------|------------|
+| Phase 1 (Virtual) | 5 | AI, EdTech |
+| Phase 2 (In-Person) | 4 | CleanTech, D2C |
+| Phase 3 (Advanced) | 3 | SaaS, HealthTech |
+| **Total** | **12** | |
+
+**Fall 2025**
+| Phase | Companies | Industries |
+|-------|-----------|------------|
+| Phase 1 (Virtual) | 0 | — |
+| Phase 2 (In-Person) | 6 | AI, Social Impact |
+| Phase 3 (Advanced) | 4 | FinTech, CleanTech |
+| **Total** | **10** | |
+
+#### Program Enhancement Highlights
+```
+HEADLINE: "THREE PHASES. ONE MISSION."
+
+PROGRAM INNOVATIONS (Icon + Text Cards):
+
+🔶 MONTHLY FOUNDER TOWNHALLS
+   Cross-cohort networking. OKR presentations. Mentor feedback loops.
+
+🔶 WEEKLY SURF SESSIONS
+   Stand-Up Rapid Fire tracking. Market validation progress. Accountability.
+
+🔶 GROUP PITCH FEEDBACK
+   Peer review. Storytelling refinement. Investor-ready pitches.
+
+🔶 PERSONALIZED 1:1 SUPPORT
+   Tailored guidance. Business challenges. Growth opportunities.
+```
+
+#### Industry Sector Icons (SVG Hexagons)
+- **EdTech** → Graduation cap icon
+- **HealthTech** → Heart + pulse icon
+- **CleanTech** → Leaf icon
+- **AI** → Brain/circuit icon
+- **SaaS** → Cloud icon
+- **FinTech** → Chart/coin icon
+- **Social Impact** → Hands icon
+- **D2C** → Shopping bag icon
+
+#### Visualization Specifications
+```jsx
+// Stacked horizontal bar chart
+// Animated on scroll-in
+// Hover reveals company count + industry breakdown
+// Tab transitions with Framer Motion
+
+<CohortTabs defaultValue="winter">
+  <Tab value="winter" label="WINTER 2025" />
+  <Tab value="spring" label="SPRING 2025" />
+  <Tab value="fall" label="FALL 2025" />
+</CohortTabs>
+```
+
+---
+
+### SECTION 5: DIGITAL GROWTH — "Explosive Reach"
+
+#### Visual Concept
+Animated line graphs with dramatic upward trajectories. Numbers should feel exciting—use bold typography and accent colors for percentage increases.
+
+#### Key Metrics (Animated Graphs)
+
+| Metric | Growth | Visual Treatment |
+|--------|--------|------------------|
+| Social Media Engagement | **+653%** | Steep line graph, bhive-orange |
+| Website Traffic | **+77%** | Line graph, bhive-gold |
+| Organic Search Impressions | **+77%** | Bar chart |
+| Instagram Impressions | **+410%** | Icon + number |
+| Facebook Impressions | **+102%** | Icon + number |
+| New Users | **+5.7%** | Subtle indicator |
+
+#### Partnership Spotlight: Altitude Accelerator
+```
+HEADLINE: "CLEANTECH PARTNERSHIP SUCCESS"
+
+VISUAL: Mini-funnel or conversion flow
+
+138 Qualified Leads → 69 Calls Booked → 48 Calls Completed
+
+CONVERSION RATE: 50% lead-to-call | 70% call completion
+```
+
+#### Content Strategy Highlights
+```
+BODY TEXT:
+Our digital transformation in 2025 wasn't just about numbers—it was about 
+reaching the right founders at the right time. Four redesigned website pages. 
+Six mentor spotlight videos. Behind-the-scenes content that humanized our brand.
+
+The result? A 653% surge in social engagement and founder applications 
+from markets we'd never reached before.
+
+VIDEO METRICS CALLOUT:
+"6 Mentor Videos | 191,949 Impressions | 14,243 Engagements"
+```
+
+#### Animation Specifications
+```jsx
+// Line graphs animate drawing path on scroll
+// Numbers count up when section enters viewport
+// Particle burst effect when hitting peak numbers
+// Responsive: Stack graphs vertically on mobile
+```
+
+---
+
+### SECTION 6: 2025 TIMELINE — "A Year of Milestones"
+
+#### Visual Concept
+Horizontal scrolling timeline (or vertical on mobile) with hexagonal milestone markers. Users drag/scroll through the year with parallax background effects.
+
+#### Timeline Events
+
+```
+JANUARY
+├─ 10: MP Ruby Sahota visits BHive
+│      Met with founders, showcased programs
+│      Attendees: Councillor Gurpartap Singh Toor, Denise McClure
+
+FEBRUARY  
+├─ 19: Angel Investing 101 (Brampton Angels)
+│      VC evaluation insights, term negotiation
+├─ 28: Innovation District Walking Tour
+│      Fujitsu (Japan) representative, GEIP showcase
+
+APRIL
+├─ 14: Polish Green Tech Delegation ⭐
+│      11 startups: renewable energy, sustainable materials
+│      City of Brampton Economic Development partnership
+├─ 17: Indo Canada Chamber of Commerce Visit
+│      Local business members, ecosystem overview
+
+JUNE
+├─ 12: BVZ Community Night: MedTech Perspectives
+│      Panel discussions, investor networking
+├─ 25: Invest Ontario Innovation District Tour
+│      Regional advisors, strategic projects team
+├─ 27: Africanada Business Summit Tour
+│      Human Squad, City of Brampton collaboration
+
+JULY
+├─ 3: Canada-Africa Summit: Kenya Delegation ⭐
+│      Trade, investment, collaboration discussions
+├─ 22: Punjab Chamber of Commerce Delegation
+│      Brampton City Hall, startup showcase
+
+SEPTEMBER
+├─ 10: Strength Africa Delegation
+│      Business and institutional leaders
+├─ 11: Brampton Venture Expo ⭐
+│      AI, HR Tech, SaaS startups showcased
+├─ 19: Sierra Leone Ministerial Delegation ⭐
+│      Honourable Minister of Trade visit
+
+OCTOBER
+├─ 7-9: Elevate Festival ⭐
+│       P2 & P3 founders, global investor access
+├─ 16: Toronto Global Forum 2025
+│      International conference, policy discussions
+
+NOVEMBER
+├─ 4: Workforce Recharged Conference + Expo
+│     Exhibitor booth, regional employer networking
+```
+
+#### Interaction Design
+1. **Drag to scroll** horizontally (desktop)
+2. **Swipe** on mobile
+3. **Click milestone** → Expand details panel
+4. **Star markers (⭐)** indicate major events
+5. **Progress indicator** shows position in timeline
+6. **Parallax** honeycomb pattern in background
+
+---
+
+### SECTION 7: RISKS & ADAPTATION — "Navigating Challenges"
+
+#### Visual Concept
+Dark, serious section with animated icons representing each challenge. Transforms into lighter "solutions" cards on scroll.
+
+#### Challenge Cards
+
+```
+┌─────────────────────────────────────────┐
+│  ⚠️ IRCC CAP ON STARTUP VISA PROGRAM   │
+├─────────────────────────────────────────┤
+│  Limited to 10 Letters of Support/year  │
+│  Fully allocated by mid-year            │
+│  Impact: Revenue, scale, recruitment    │
+│                                         │
+│  → RESPONSE: Quality over quantity      │
+│    Rigorous selection, focused support  │
+└─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────┐
+│  🌐 INDIA-CANADA POLITICAL CLIMATE     │
+├─────────────────────────────────────────┤
+│  Diplomatic tensions affect outreach    │
+│  Key market disruption                  │
+│                                         │
+│  → RESPONSE: Market diversification     │
+│    Latin America, Southeast Asia focus  │
+└─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────┐
+│  📋 WORK PERMIT DELAYS                 │
+├─────────────────────────────────────────┤
+│  Open Work Permit policy confusion      │
+│  Founder commitment uncertainty         │
+│                                         │
+│  → RESPONSE: Enhanced communication     │
+│    Proactive founder support systems    │
+└─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────┐
+│  💰 REVENUE & SUSTAINABILITY           │
+├─────────────────────────────────────────┤
+│  SUV cap reduced projections            │
+│  Future cohort planning affected        │
+│                                         │
+│  → RESPONSE: FedDev application         │
+│    Alternative funding exploration      │
+└─────────────────────────────────────────┘
+```
+
+---
+
+### SECTION 8: FUTURE OUTLOOK — "What's Next"
+
+#### Visual Concept
+Light, optimistic section with animated hexagons forming a path forward. Large typography with strategic pillars.
+
+#### Strategic Pillars Content
+
+```
+HEADLINE: "BUILDING TOMORROW'S ECOSYSTEM"
+
+PILLAR 1: ALTERNATIVE PATHWAYS
+Explore support programs beyond the Startup Visa Program.
+Diversify immigration and business pathways for founders.
+
+PILLAR 2: INVESTOR ENGAGEMENT  
+Increase local investor participation.
+Build sustainable funding networks for portfolio companies.
+
+PILLAR 3: DIGITAL SCALABILITY
+Enhance hybrid and digital program delivery.
+Reach founders globally without geographic limitations.
+
+PILLAR 4: STRATEGIC SELECTION
+Maintain rigorous due diligence standards.
+Focus resources on teams with highest impact potential.
+
+CLOSING STATEMENT:
+"With a strong foundation built in 2025, BHive is positioned 
+for continued entrepreneurial success in Brampton and beyond."
+```
+
+#### Visual Elements
+- Animated "pathway" of hexagons leading upward
+- Each pillar appears as a hoverable hexagonal card
+- Final CTA button: "Partner With Us" (bhive-orange)
+- Subtle confetti animation on section complete
+
+---
+
+### SECTION 9: FOOTER — "Connect"
+
+```
+BHIVE LOGO (Animated)
+
+CONTACT CTA: "Ready to scale into Canada?"
+BUTTON: "APPLY NOW" (bhive-orange, sharp corners)
+
+SOCIAL LINKS: LinkedIn | Instagram | Twitter | Website
+
+PREPARED BY:
+Toronto Business Development Centre
+For the City of Brampton
+
+© 2025 BHive. All rights reserved.
+```
+
+---
+
+## V. INTERACTION & ANIMATION SPECIFICATIONS
+
+### Scroll-Triggered Animations
+
+| Element | Trigger Point | Animation |
+|---------|---------------|-----------|
+| Section headers | 20% viewport | Fade up + slide |
+| Counter numbers | 30% viewport | Count up |
+| Charts/graphs | 40% viewport | Draw path |
+| Cards | Staggered | Fade + scale |
+| Globe | Section enter | Start rotation |
+| Timeline | Section enter | Reveal markers |
+
+### Micro-interactions
+- **Buttons**: Scale 1.05 on hover, bhive-orange glow
+- **Cards**: Subtle lift (translateY -4px) + shadow
+- **Hexagons**: Pulse animation on hover
+- **Links**: Underline draw animation
+- **Numbers**: Slight bounce on count complete
+
+### Performance Targets
+- **First Contentful Paint**: < 1.5s
+- **Largest Contentful Paint**: < 2.5s
+- **Time to Interactive**: < 3.5s
+- **Cumulative Layout Shift**: < 0.1
+
+---
+
+## VI. RESPONSIVE BREAKPOINTS
+
+```css
+/* Mobile First Approach */
+sm: 640px   → Stack layouts, simplified globe
+md: 768px   → Two-column grids begin
+lg: 1024px  → Full layouts, horizontal timeline
+xl: 1280px  → Maximum content width
+2xl: 1536px → Large screen optimizations
+```
+
+### Mobile Adaptations
+- Globe → Static map with clickable hotspots
+- Horizontal timeline → Vertical scroll
+- Funnel → Stacked bars
+- Side-by-side → Stacked cards
+- Reduced animation complexity
+
+---
+
+## VII. ACCESSIBILITY REQUIREMENTS
+
+- **WCAG 2.1 AA** compliance minimum
+- Skip navigation link
+- Alt text for all visualizations
+- Screen reader-friendly data tables as fallback
+- Reduced motion media query support
+- Minimum 4.5:1 contrast ratios
+- Focus indicators on all interactive elements
+- Keyboard navigation throughout
+
+---
+
+## VIII. FILE STRUCTURE
+
+```
+/bhive-annual-report-2025
+├── /app
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── globals.css
+├── /components
+│   ├── /sections
+│   │   ├── Hero.tsx
+│   │   ├── Challenge.tsx
+│   │   ├── GlobalMap.tsx
+│   │   ├── Cohorts.tsx
+│   │   ├── DigitalGrowth.tsx
+│   │   ├── Timeline.tsx
+│   │   ├── Risks.tsx
+│   │   ├── Future.tsx
+│   │   └── Footer.tsx
+│   ├── /ui
+│   │   ├── HexagonCard.tsx
+│   │   ├── CounterNumber.tsx
+│   │   ├── AnimatedChart.tsx
+│   │   ├── Button.tsx
+│   │   └── Tooltip.tsx
+│   ├── /visualizations
+│   │   ├── Globe.tsx
+│   │   ├── FunnelChart.tsx
+│   │   ├── StackedBar.tsx
+│   │   └── LineGraph.tsx
+│   └── /layout
+│       ├── Navigation.tsx
+│       ├── ProgressBar.tsx
+│       └── ScrollIndicator.tsx
+├── /lib
+│   ├── data.ts (all metrics/content)
+│   ├── animations.ts (GSAP configs)
+│   └── utils.ts
+├── /public
+│   ├── /fonts
+│   ├── /images
+│   └── /icons
+├── tailwind.config.js
+├── next.config.js
+└── package.json
+```
+
+---
+
+## IX. DATA OBJECTS
+
+```typescript
+// lib/data.ts
+
+export const heroMetrics = {
+  graduatedCompanies: 66,
+  newStartups2025: 14,
+  programmingHours: 3578,
+  totalLeads: 5781,
+  activeMentors: 69,
+  eventsCount: 23,
+};
+
+export const cohortData = {
+  winter2025: { phase1: 4, phase2: 4, phase3: 7 },
+  spring2025: { phase1: 5, phase2: 4, phase3: 3 },
+  fall2025: { phase1: 0, phase2: 6, phase3: 4 },
+};
+
+export const delegations = [
+  {
+    country: 'Poland',
+    coordinates: [52.2297, 21.0122],
+    event: 'Green Tech Delegation',
+    date: 'April 14, 2025',
+    details: '11 startups in renewable energy, sustainable materials',
+  },
+  // ... additional delegation data
+];
+
+export const digitalGrowth = {
+  socialEngagement: 653,
+  websiteTraffic: 77,
+  instagramImpressions: 410,
+  facebookImpressions: 102,
+  newUsers: 5.7,
+};
+
+export const timelineEvents = [
+  {
+    date: 'January 10, 2025',
+    title: 'MP Ruby Sahota Visit',
+    description: 'Met with founders, showcased programs',
+    featured: false,
+  },
+  // ... additional timeline events
+];
+```
+
+---
+
+## X. DEVELOPMENT PHASES
+
+### Phase 1: Foundation (Week 1-2)
+- [ ] Project setup (Next.js, Tailwind, TypeScript)
+- [ ] Design system implementation (colors, fonts, hexagon components)
+- [ ] Base layout and navigation
+- [ ] Smooth scroll setup (Lenis)
+
+### Phase 2: Sections (Week 3-4)
+- [ ] Hero section with animated counters
+- [ ] Challenge/Funnel visualization
+- [ ] Cohort tabs and charts
+- [ ] Digital growth graphs
+
+### Phase 3: Advanced Visualizations (Week 5-6)
+- [ ] 3D Globe implementation
+- [ ] Timeline horizontal scroll
+- [ ] GSAP ScrollTrigger integration
+- [ ] Micro-interactions polish
+
+### Phase 4: Polish & QA (Week 7-8)
+- [ ] Responsive testing
+- [ ] Performance optimization
+- [ ] Accessibility audit
+- [ ] Cross-browser testing
+- [ ] Content review
+
+---
+
+## XI. ASSET REQUIREMENTS
+
+### From Design Team
+- [ ] BHive logo (SVG, multiple variants)
+- [ ] Hexagon pattern tiles (SVG)
+- [ ] Industry sector icons (SVG set)
+- [ ] Founder/team photos (if featuring)
+- [ ] Event photography (delegations, conferences)
+
+### Fonts to Load
+- Bebas Neue (Bold, Condensed) — Google Fonts
+- Montserrat (400, 500, 600) — Google Fonts
+
+### External Assets
+- World map GeoJSON for globe
+- Country flag icons (optional)
+
+---
+
+## XII. DEPLOYMENT RECOMMENDATIONS
+
+- **Platform**: Vercel (optimal for Next.js)
+- **Domain**: annual-report.bhive.ca or similar
+- **CDN**: Vercel Edge Network
+- **Analytics**: Vercel Analytics + custom scroll tracking
+- **Monitoring**: Sentry for error tracking
+
+---
+
+*Document prepared for BHive Web Development Team*
+*Last updated: January 2026*
