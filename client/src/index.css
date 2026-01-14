@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* LIGHT MODE */
+/* LIGHT MODE - BHive Brand Colors */
 :root {
   --button-outline: rgba(0,0,0, .10);
   --badge-outline: rgba(0,0,0, .05);
@@ -10,40 +10,46 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
   --background: 0 0% 100%;
-  --foreground: 0 0% 9%;
+  --foreground: 0 0% 0%;
   --border: 0 0% 90%;
   --card: 0 0% 98%;
-  --card-foreground: 0 0% 9%;
+  --card-foreground: 0 0% 0%;
   --card-border: 0 0% 94%;
   --sidebar: 0 0% 96%;
-  --sidebar-foreground: 0 0% 9%;
+  --sidebar-foreground: 0 0% 0%;
   --sidebar-border: 0 0% 92%;
-  --sidebar-primary: 45 98% 51%;
-  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-primary: 45 98% 52%;
+  --sidebar-primary-foreground: 0 0% 0%;
   --sidebar-accent: 0 0% 92%;
-  --sidebar-accent-foreground: 0 0% 9%;
-  --sidebar-ring: 45 98% 51%;
+  --sidebar-accent-foreground: 0 0% 0%;
+  --sidebar-ring: 45 98% 52%;
   --popover: 0 0% 94%;
-  --popover-foreground: 0 0% 9%;
+  --popover-foreground: 0 0% 0%;
   --popover-border: 0 0% 88%;
-  --primary: 45 98% 51%;
-  --primary-foreground: 0 0% 98%;
+  --primary: 45 98% 52%;
+  --primary-foreground: 0 0% 0%;
   --secondary: 0 0% 92%;
-  --secondary-foreground: 0 0% 9%;
+  --secondary-foreground: 0 0% 0%;
   --muted: 0 0% 90%;
   --muted-foreground: 0 0% 35%;
   --accent: 0 0% 88%;
-  --accent-foreground: 0 0% 9%;
+  --accent-foreground: 0 0% 0%;
   --destructive: 0 84% 45%;
   --destructive-foreground: 0 0% 98%;
   --input: 0 0% 70%;
-  --ring: 45 98% 51%;
-  --chart-1: 45 98% 35%;
-  --chart-2: 18 100% 50%;
+  --ring: 45 98% 52%;
+  --chart-1: 45 98% 52%;
+  --chart-2: 22 100% 55%;
   --chart-3: 33 100% 50%;
   --chart-4: 0 84% 45%;
   --chart-5: 210 100% 45%;
-  --font-sans: Open Sans, sans-serif;
+  --bhive-gold: 45 96% 52%;
+  --bhive-yellow: 22 100% 55%;
+  --bhive-orange: 33 100% 50%;
+  --bhive-black: 0 0% 0%;
+  --bhive-grey: 120 43% 95%;
+  --font-sans: 'Montserrat', sans-serif;
+  --font-headline: 'Bebas Neue', sans-serif;
   --font-serif: Georgia, serif;
   --font-mono: Menlo, monospace;
   --radius: .5rem;
@@ -93,7 +99,7 @@
   --opaque-button-border-intensity: 9;
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
-  --background: 0 0% 7%;
+  --background: 0 0% 5%;
   --foreground: 0 0% 95%;
   --border: 0 0% 18%;
   --card: 0 0% 9%;
@@ -102,16 +108,16 @@
   --sidebar: 0 0% 11%;
   --sidebar-foreground: 0 0% 95%;
   --sidebar-border: 0 0% 14%;
-  --sidebar-primary: 45 98% 51%;
-  --sidebar-primary-foreground: 0 0% 9%;
+  --sidebar-primary: 45 98% 52%;
+  --sidebar-primary-foreground: 0 0% 0%;
   --sidebar-accent: 0 0% 14%;
   --sidebar-accent-foreground: 0 0% 95%;
-  --sidebar-ring: 45 98% 51%;
+  --sidebar-ring: 45 98% 52%;
   --popover: 0 0% 13%;
   --popover-foreground: 0 0% 95%;
   --popover-border: 0 0% 16%;
-  --primary: 45 98% 51%;
-  --primary-foreground: 0 0% 9%;
+  --primary: 45 98% 52%;
+  --primary-foreground: 0 0% 0%;
   --secondary: 0 0% 16%;
   --secondary-foreground: 0 0% 95%;
   --muted: 0 0% 15%;
@@ -121,12 +127,17 @@
   --destructive: 0 84% 45%;
   --destructive-foreground: 0 0% 98%;
   --input: 0 0% 30%;
-  --ring: 45 98% 51%;
-  --chart-1: 45 98% 65%;
-  --chart-2: 18 100% 65%;
-  --chart-3: 33 100% 65%;
+  --ring: 45 98% 52%;
+  --chart-1: 45 98% 52%;
+  --chart-2: 22 100% 55%;
+  --chart-3: 33 100% 50%;
   --chart-4: 0 84% 60%;
   --chart-5: 210 100% 65%;
+  --bhive-gold: 45 96% 52%;
+  --bhive-yellow: 22 100% 55%;
+  --bhive-orange: 33 100% 50%;
+  --bhive-black: 0 0% 0%;
+  --bhive-grey: 120 43% 95%;
   --shadow-2xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
   --shadow-xs: 0px 2px 0px 0px hsl(0 0% 0% / 0.00);
   --shadow-sm: 0px 2px 0px 0px hsl(0 0% 0% / 0.00), 0px 1px 2px -1px hsl(0 0% 0% / 0.00);
@@ -172,6 +183,25 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hex-clip {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   }
 }
 
